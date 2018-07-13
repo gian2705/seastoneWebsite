@@ -1,0 +1,234 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %}Properties Listing{% endblock title %}
+{% block topheader %}
+    {% for company in company_details %}
+        <div class="top-header-area">
+            <div class="h-100 d-md-flex justify-content-between align-items-center">
+                <div class="email-address">
+                    <a href="mailto:{{ company.email }}">{{ company.email }}</a>
+                </div>
+                <div class="phone-number d-flex">
+                    <div class="icon">
+                        <img src="{% static 'img/icons/phone-call.png' %}" alt="">
+                    </div>
+                    <div class="number">
+                        <a href="tel:{{ company.phoneno }}">{{ company.phoneno }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock topheader %}
+{% block body %}
+    <!-- ##### Breadcumb Area Start ##### -->
+    <section class="breadcumb-area bg-img" style="background-image: url({% static 'img/bg-img/hero1.jpg' %});">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="breadcumb-content">
+                        <h3 class="breadcumb-title">Listings</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Breadcumb Area End ##### -->
+
+    <!-- ##### Advance Search Area Start ##### -->
+    <div class="south-search-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="advanced-search-form">
+                        <!-- Search Title -->
+                        <div class="search-title">
+                            <p>Search for your home</p>
+                        </div>
+                        <!-- Search Form -->
+                        <form action="#" method="post" id="advanceSearch">
+                            <div class="row">
+
+                                <div class="col-12 col-md-4 col-lg-3">
+                                    <div class="form-group">
+                                        <input type="input" class="form-control" name="input" placeholder="Keyword">
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-4 col-lg-3">
+                                    <div class="form-group">
+                                        <input type="input" class="form-control" name="input" placeholder="City">
+
+
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-4 col-lg-3">
+                                    <div class="form-group">
+                                        <select class="form-control" id="catagories">
+                                            <option>All Catagories</option>
+                                            <option>Apartment</option>
+                                            <option>Bar</option>
+                                            <option>Farm</option>
+                                            <option>House</option>
+                                            <option>Store</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-4 col-lg-3">
+                                    <div class="form-group">
+                                        <select class="form-control" id="offers">
+                                            <option>All Offers</option>
+                                            <option>100% OFF</option>
+                                            <option>75% OFF</option>
+                                            <option>50% OFF</option>
+                                            <option>25% OFF</option>
+                                            <option>10% OFF</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-4 col-xl-2">
+                                    <div class="form-group">
+                                        <select class="form-control" id="bedrooms">
+                                            <option>Bedrooms</option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5+</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-4 col-xl-2">
+                                    <div class="form-group">
+                                        <select class="form-control" id="bathrooms">
+                                            <option>Bathrooms</option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5+</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-8 col-lg-12 col-xl-5 d-flex">
+                                    <!-- Space Range -->
+                                    <div class="slider-range">
+                                        <div data-min="120" data-max="820" data-unit=" sq. ft" class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-value-min="120" data-value-max="820">
+                                            <div class="ui-slider-range ui-widget-header ui-corner-all"></div>
+                                            <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
+                                            <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
+                                        </div>
+                                        <div class="range">120 sq. ft - 820 sq. ft</div>
+                                    </div>
+
+                                    <!-- Distance Range -->
+                                    <div class="slider-range">
+                                        <div data-min="10" data-max="1300" data-unit=" mil" class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-value-min="10" data-value-max="1300">
+                                            <div class="ui-slider-range ui-widget-header ui-corner-all"></div>
+                                            <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
+                                            <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
+                                        </div>
+                                        <div class="range">10 mil - 1300 mil</div>
+                                    </div>
+                                </div>
+
+
+                                <!-- Submit -->
+                                <div class="form-group mb-0">
+                                    <button type="submit" class="btn south-btn">Search</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Advance Search Area End ##### -->
+
+    <!-- ##### Listing Content Wrapper Area Start ##### -->
+    <section class="listings-content-wrapper section-padding-100">
+        <div class="container">
+            <div class="row">
+                {% for property in properties %}
+                    <!-- Single Featured Property -->
+                    <div class="col-12 col-md-6 col-xl-4">
+
+                        <a href="{% url 'home:property' id=property.id %}">
+                            <div class="single-featured-property mb-50 wow fadeInUp" data-wow-delay="100ms">
+                                <!-- Property Thumbnail -->
+                                <div class="property-thumb">
+                                    <img src="{% static 'img/bg-img/feature1.jpg' %}" alt="">
+
+                                    <div class="tag">
+                                        <span>FOR {{ property.type_of_property }}</span>
+                                    </div>
+                                    <div class="list-price">
+                                        <p>${{ property.price |intcomma }}</p>
+                                    </div>
+                                </div>
+                                <!-- Property Content -->
+                                <div class="property-content">
+                                    <h5>{{ property.title }}</h5>
+                                    <p class="location"><img src="{% static 'img/icons/location.png' %}" alt="">{{ property.location }}, {{ property.city }}</p>
+                                    <p>{{ property.description | truncatechars:120 }}</p>
+                                    <div class="property-meta-data d-flex align-items-end justify-content-between">
+                                        <div class="new-tag">
+                                            <img src="{% static 'img/icons/new.png' %}" alt="">
+                                        </div>
+                                        <div class="bathroom">
+                                            <img src="{% static 'img/icons/bathtub.png' %}" alt="">
+                                            <span>{{ property.bathNo }}</span>
+                                        </div>
+                                        <div class="garage">
+                                            <img src="{% static 'img/icons/garage.png' %}" alt="">
+                                            <span>{{ property.bedNo }}</span>
+                                        </div>
+                                        <div class="space">
+                                            <img src="{% static 'img/icons/space.png' %}" alt="">
+                                            <span>{{ property.size | intcomma}} sq m</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+
+                    </div>
+                {% endfor %}
+            </div>
+        <div class="row">
+                    <div class="col-12 col-lg-12 col-md-12">
+                        <div class="south-pagination d-flex justify-content-end">
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination">
+                                    {% if properties.has_previous %}
+                                        <li class="page-item"><a class="page-link" href="?page={{ properties.previous_page_number }}">{{ properties.previous_page_number }}</a></li>
+                                    {% endif %}
+                                    <li class="page-item active"><a class="page-link" href="?page={{ properties.number }}">{{ properties.number }}</a></li>
+                                    {% if properties.has_next %}
+                                        <li class="page-item"><a class="page-link" href="?page={{ properties.next_page_number }}">{{ properties.next_page_number }}</a></li>
+                                    {% endif %}
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </section>
+    <!-- ##### Listing Content Wrapper Area End ##### -->
+{% endblock body %}
+{% block footeraddress %}
+    <div class="address">
+        {% for company in company_details %}
+            <h6><img src="{% static 'img/icons/phone-call.png' %}" alt="">{{ company.phoneno }}</h6>
+            <h6><img src="{% static 'img/icons/envelope.png' %}" alt="">{{ company.email }}</h6>
+            <h6><img src="{% static 'img/icons/location.png' %}" alt="">{{ company.address }} </h6>
+        {% endfor %}
+    </div>
+{% endblock footeraddress %}

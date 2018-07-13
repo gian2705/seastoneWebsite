@@ -1,0 +1,180 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %}Contact Us{% endblock title %}
+{% block topheader %}
+    {% for company in company_details %}
+    <div class="top-header-area">
+        <div class="h-100 d-md-flex justify-content-between align-items-center">
+            <div class="email-address">
+                <a href="mailto:{{ company.email }}">{{ company.email }}</a>
+            </div>
+            <div class="phone-number d-flex">
+                <div class="icon">
+                    <img src="{% static 'img/icons/phone-call.png' %}" alt="">
+                </div>
+                <div class="number">
+                    <a href="tel:{{ company.phoneno }}">{{ company.phoneno }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+{% endblock topheader %}
+{% block body %}
+    {% load widget_tweaks %}
+    <!-- ##### Breadcumb Area Start ##### -->
+    <section class="breadcumb-area bg-img" style="background-image: url({% static 'img/bg-img/hero1.jpg' %});">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="breadcumb-content">
+                        <h3 class="breadcumb-title">Contact</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Breadcumb Area End ##### -->
+
+    <section class="south-contact-area section-padding-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="contact-heading">
+                        <h6>Contact info</h6>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-lg-4">
+
+                    <div class="content-sidebar">
+                        <!-- Office Hours -->
+                        <div class="col-12">
+                            <div class="contact-heading">
+                                <h6>Working hours</h6>
+                            </div>
+                        </div>
+                        <div class="weekly-office-hours">
+                            <ul>
+                                <li class="d-flex align-items-center justify-content-between"><span>Monday - Friday</span> <span>09 AM - 19 PM</span></li>
+                                <li class="d-flex align-items-center justify-content-between"><span>Saturday</span> <span>09 AM - 14 PM</span></li>
+                                <li class="d-flex align-items-center justify-content-between"><span>Sunday</span> <span>Closed</span></li>
+                            </ul>
+                        </div>
+                        <!-- Address -->
+                        <div class="address mt-30">
+                            {% for company in company_details %}
+                            <h6><img src="{% static 'img/icons/phone-call.png' %}" alt="">{{ company.phoneno }} </h6>
+                            <h6><img src="{% static 'img/icons/envelope.png' %}" alt=""> {{ company.email }}</h6>
+                            {#                            <h6><img src="{% static 'img/icons/airbnb.png' %}" alt="">{{ company.plot }}</h6>#}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form Area -->
+                <div class="col-12 col-lg-8">
+                    <div class="contact-form">
+                        {% if messages %}
+                            <ul class="messages">
+                                {% for message in messages %}
+                                    <li{% if message.tags %} class="{{ message.tags }} alert alert-success alert-dismissible fade show"{% endif %}
+                                        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} class="{{ message.tags }} alert alert-error alert-danger alert-dismissible fade show" {% endif %}>
+                                        {{ message }}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                {% render_field form.name class='form-control' name='text' id='contact-name' placeholder="Your Name" %}
+                            </div>
+                            <div class="form-group">
+                                {% render_field form.phoneNo class='form-control' name='number' id='contact-number' placeholder="Your Phone number" %}
+                            </div>
+                            <div class="form-group">
+                                {% render_field form.email class='form-control' name='email' id='contact-email' placeholder="Your Email" %}
+                            </div>
+                            <div class="form-group">
+                                {% render_field form.message class='form-control' name='message' id='message' placeholder="Your Message" cols="30" rows="10" %}
+                            </div>
+                            <button type="submit" class="btn south-btn">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ##### Call To Action Area Start ##### -->
+    <section class="call-to-action-area bg-fixed bg-overlay-black" style="background-image: url({%  static 'img/bg-img/cta.jpg' %})">
+        <div class="container h-100">
+            <div class="row align-items-center h-100">
+                <div class="col-12">
+                    <div class="cta-content text-center">
+                        <h2 class="wow fadeInUp" data-wow-delay="300ms"> Visit us on Social Media </h2>
+                        <a href = "#"><img border= "0" alt = "airbnb" src = "{% static 'img/icons/airbnb.png' %}" width = "50" height = "50"></a>
+
+
+                        <a href = "#"><img border= "0" alt = "facebook" src = "{% static 'img/icons/facebook.png' %}" width = "50" height = "50"></a>
+
+
+                        <a href = "#"><img border= "0" alt = "houzz" src = "{% static 'img/icons/houzz.png' %}" width = "50" height = "50"></a>
+
+
+                        <a href = "#"><img border= "0" alt = "instagram" src = "{% static 'img/icons/instagram.png' %}" width = "50" height = "50"></a>
+
+
+                        <a href = "#"><img border= "0" alt = "issuu" src = "{% static 'img/icons/issuu-logo-symbol-black.png' %}" width = "50" height = "50"></a>
+
+
+                        <a href = "#"><img border= "0" alt = "linkedin" src = "{% static 'img/icons/linkedin-logo.png' %}" width = "50" height = "50"></a>
+
+
+                        <a href = "#"><img border= "0" alt = "pinterest" src = "{% static 'img/icons/pinterest.png' %}" width = "50" height = "50"></a>
+
+
+                        <a href = "#"><img border= "0" alt = "skype" src = "{% static 'img/icons/skype.png' %}" width = "50" height = "50"></a>
+
+
+                        <a href = "#"><img border= "0" alt = "telegram" src = "{% static 'img/icons/telegram.png' %}" width = "50" height = "50"></a>
+
+
+                        <a href = "#"><img border= "0" alt = "twitter" src = "{% static 'img/icons/twitter-logo-silhouette.png' %}" width = "50" height = "50"></a>
+
+
+                        <a href = "#"><img border= "0" alt = "whatsapp" src = "{% static 'img/icons/whatsapp-logo.png' %}" width = "50" height = "50"></a>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Call To Action Area End ##### -->
+
+    <!-- Google Maps -->
+    <div class="map-area mb-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div id="googleMap" class="googleMap"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}
+{% block footeraddress %}
+    <div class="address">
+    {% for company in company_details %}
+                                <h6><img src="{% static 'img/icons/phone-call.png' %}" alt="">{{ company.phoneno }}</h6>
+                                <h6><img src="{% static 'img/icons/envelope.png' %}" alt="">{{ company.email }}</h6>
+                                <h6><img src="{% static 'img/icons/location.png' %}" alt="">{{ company.address }} </h6>
+    {% endfor %}
+                            </div>
+{% endblock footeraddress %}

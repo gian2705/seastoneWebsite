@@ -1,0 +1,188 @@
+{% load static %}
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title  -->
+    <title>SEASTONE | {% block title %}{% endblock title %}</title>
+
+    <!-- Favicon  -->
+    <link rel="icon" href="{% static 'img/logo/NavBarLogo.jpeg' %}">
+
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/checkbox.css' %}">
+
+</head>
+<body>
+<!-- Preloader -->
+<div id="preloader">
+    <div class="south-load"></div>
+</div>
+<!-- Preloader end -->
+
+<!-- ##### Header Area Start ##### -->
+<header class="header-area">
+
+    <!-- Top Header Area -->
+    {% block topheader %}{% endblock topheader %}
+
+    <!-- Main Header Area -->
+    <div class="main-header-area" id="stickyHeader">
+        <div class="classy-nav-container breakpoint-off">
+            <!-- Classy Menu -->
+            <nav class="classy-navbar justify-content-between" id="southNav">
+
+                <!-- Logo -->
+                <a class="nav-brand" href="{% url 'home:home_page' %}"><img src="{% static 'img/logo/NavBarLogo.jpeg' %}" style="width: 120px; height: auto"></a>
+
+                <!-- Navbar Toggler -->
+                <div class="classy-navbar-toggler">
+                    <span class="navbarToggler"><span></span><span></span><span></span></span>
+                </div>
+
+                <!-- Menu -->
+                <div class="classy-menu">
+
+                    <!-- close btn -->
+                    <div class="classycloseIcon">
+                        <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                    </div>
+
+                    <!-- Nav Start -->
+                    <div class="classynav">
+                        <ul>
+                            <li><a href="{% url 'home:home_page' %}">Home</a></li>
+                            <li><a href="{% url 'home:about_us' %}">About Us</a></li>
+                            <li><a href="{% url 'home:listing' %}">Properties</a></li>
+                            <li><a href="{% url 'home:blog' %}">Blog</a></li>
+                            <li><a href="{% url 'home:contact' %}">Contact</a></li>
+                            <li><a href="#">Other Pages</a>
+                                <ul class="dropdown">
+                                    <li><a href="{% url 'home:listing' %}">Listings</a></li>
+{#                                    <li><a href="{% url 'home:listing' %}">Products</a></li>#}
+                                    <li><a href="{% url 'home:career' %}">Careers</a></li>
+{#                                    <li><a href="gallery.html">Gallery</a></li>#}
+{#                                    <li><a href="news.html">News</a></li>#}
+{#                                    <li><a href="foundation.html">Foundation</a></li>#}
+{#                                    <li><a href="{% url 'home:blog' %}">Blog</a></li>#}
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Nav End -->
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+<!-- ##### Header Area End ##### -->
+
+{% block body %}{% endblock body %}
+
+ <!-- ##### Footer Area Start ##### -->
+    <footer class="footer-area section-padding-100-0 bg-img gradient-background-overlay" style="background-image: url({% static 'img/bg-img/cta.jpg' %});">
+        <!-- Main Footer Area -->
+        <div class="main-footer-area">
+            <div class="container">
+                <div class="row">
+
+                    <!-- Single Footer Widget -->
+                    <div class="col-12 col-sm-6 col-xl-3">
+                        <div class="footer-widget-area mb-100">
+                            <!-- Widget Title -->
+                            <div class="widget-title">
+                                <h6>About Us</h6>
+                            </div>
+
+{#                            <img src="{% static 'img/bg-img/footer.jpg' %}" alt="">#}
+                            <div class="footer-logo my-4">
+                                <img src="{% static 'img/logo/FooterLogo.jpeg' %}" alt="">
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Single Footer Widget -->
+                    <div class="col-12 col-sm-6 col-xl-3">
+                        <div class="footer-widget-area mb-100">
+                            <!-- Widget Title -->
+                            <div class="widget-title">
+                                <h6>Hours</h6>
+                            </div>
+                            <!-- Office Hours -->
+                            <div class="weekly-office-hours">
+                                <ul>
+                                    <li class="d-flex align-items-center justify-content-between"><span>Monday - Friday</span> <span>09 AM - 19 PM</span></li>
+                                    <li class="d-flex align-items-center justify-content-between"><span>Saturday</span> <span>09 AM - 14 PM</span></li>
+                                    <li class="d-flex align-items-center justify-content-between"><span>Sunday</span> <span>Closed</span></li>
+                                </ul>
+                            </div>
+                            <!-- Address -->
+                            {% block footeraddress %}{% endblock footeraddress %}
+                        </div>
+                    </div>
+
+                    <!-- Single Footer Widget -->
+                    <div class="col-12 col-sm-6 col-xl-3">
+                        <div class="footer-widget-area mb-100">
+                            <!-- Widget Title -->
+                            <div class="widget-title">
+                                <h6>Useful Links</h6>
+                            </div>
+                            <!-- Nav -->
+                            <ul class="useful-links-nav d-flex align-items-center">
+                                <li><a href="{% url 'home:home_page' %}">Home</a></li>
+                               <li><a href="{% url 'home:about_us' %}">About us</a></li>
+                                <li><a href="{% url 'home:listing' %}">Services</a></li>
+                                <li><a href="{% url 'home:listing' %}">Properties</a></li>
+                                <li><a href="{% url 'home:blog' %}">Blog</a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <!-- Single Footer Widget -->
+                    <div class="col-12 col-sm-6 col-xl-3">
+                        <div class="footer-widget-area mb-100">
+                            <!-- Widget Title -->
+                            <div class="widget-title">
+                                <h6>Featured Properties</h6>
+                            </div>
+                           {% block featured_slider %}{% endblock featured_slider %}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Copywrite Text -->
+        <div class="copywrite-text d-flex align-items-center justify-content-center">
+            <p>Copyright @ seastone 2018</p>
+        </div>
+    </footer>
+    <!-- ##### Footer Area End ##### -->
+
+    <!-- jQuery (Necessary for All JavaScript Plugins) -->
+    <script src="{% static 'js/jquery/jquery-2.2.4.min.js' %}"></script>
+    <!-- Popper js -->
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <!-- Bootstrap js -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- Plugins js -->
+    <script src="{% static 'js/plugins.js' %}"></script>
+    <script src="{% static 'js/classy-nav.min.js' %}"></script>
+    <script src="{% static 'js/jquery-ui.min.js' %}"></script>
+    <!-- Active js -->
+    <script src="{% static 'js/active.js' %}"></script>
+    <script src="//platform-api.sharethis.com/js/sharethis.js#property=5b3a215f07712f001137836f&product=inline-share-buttons"></script>
+</body>
+</html>

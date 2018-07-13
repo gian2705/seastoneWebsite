@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{%block title%}Property view{% endblock title %}
+{% block topheader %}
+    {% for company in company_details %}
+    <div class="top-header-area">
+        <div class="h-100 d-md-flex justify-content-between align-items-center">
+            <div class="email-address">
+                <a href="mailto:{{ company.email }}">{{ company.email }}</a>
+            </div>
+            <div class="phone-number d-flex">
+                <div class="icon">
+                    <img src="{% static 'img/icons/phone-call.png' %}" alt="">
+                </div>
+                <div class="number">
+                    <a href="tel:{{ company.phoneno }}">{{ company.phoneno }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+{% endblock topheader %}
+{% block body %}
+    <!-- ##### Listings Content Area Start ##### -->
+    <section class="listings-content-wrapper section-padding-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <!-- Single Listings Slides -->
+                    <div class="single-listings-sliders owl-carousel">
+                        {% for image in images %}
+                        <!-- Single Slide -->
+                        <img src="{{ image.image.url }}" alt="{% static 'img/bg-img/hero5.jpg' %}">
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-8">
+                    <div class="listings-content">
+                        <!-- Price -->
+                        <div class="list-price">
+                            <p>$945 679</p>
+                        </div>
+                        <h5>{{ property.title }}</h5>
+                        <p class="location"><img src="{% static 'img/icons/location.png' %}" alt="">{{ property.location }}, {{ property.city }}</p>
+                        <p>{{ property.description }}</p>
+                        <!-- Meta -->
+                        <div class="property-meta-data d-flex align-items-end">
+                            <div class="new-tag">
+                                <img src="{% static 'img/icons/new.png' %}" alt="">
+                            </div>
+                            <div class="bathroom">
+                                <img src="{% static 'img/icons/bathtub.png' %}" alt="">
+                                <span>{{ property.bathNo }}</span>
+                            </div>
+                            <div class="garage">
+                                <img src="{% static 'img/icons/garage.png' %}" alt="">
+                                <span>{{ property.bedNo }}</span>
+                            </div>
+                            <div class="space">
+                                <img src="{% static 'img/icons/space.png' %}" alt="">
+                                <span>{{ property.size }} sq m</span>
+                            </div>
+                        </div>
+                        <!-- Core Features -->
+                        <ul class="listings-core-features d-flex align-items-center">
+                            <li><i class="fa fa-check" aria-hidden="true"></i> Gated Community</li>
+                            <li><i class="fa fa-check" aria-hidden="true"></i> Automatic Sprinklers</li>
+                            <li><i class="fa fa-check" aria-hidden="true"></i> Fireplace</li>
+                            <li><i class="fa fa-check" aria-hidden="true"></i> Window Shutters</li>
+                            <li><i class="fa fa-check" aria-hidden="true"></i> Ocean Views</li>
+                            <li><i class="fa fa-check" aria-hidden="true"></i> Heated Floors</li>
+                            <li><i class="fa fa-check" aria-hidden="true"></i> Heated Floors</li>
+                            <li><i class="fa fa-check" aria-hidden="true"></i> Private Patio</li>
+                            <li><i class="fa fa-check" aria-hidden="true"></i> Window Shutters</li>
+                            <li><i class="fa fa-check" aria-hidden="true"></i> Fireplace</li>
+                            <li><i class="fa fa-check" aria-hidden="true"></i> Beach Access</li>
+                            <li><i class="fa fa-check" aria-hidden="true"></i> Rooftop Terrace</li>
+                        </ul>
+                        <!-- Listings Btn Groups -->
+
+                        <div class="listings-btn-groups">
+{#                           <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}"> <i class="fa-facebook" ></i>Facebook</a>#}
+{#                            <a href="https://twitter.com/home?status={{ share_string }}%20{{ request.build_absolute_uri }}" class="btn south-btn active"><i class="fa-twitter"></i> </a>#}
+{#                            <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://swiftforentrepreneurs.com/&title={{ property.title }}&summary={{ share_string }}&source={{ request.build_absolute_uri }}" class="btn south-btn active"><i class="fa-linkedin"></i> </a>#}
+                            <h4>Share about this property</h4>
+{#                           <div class="sharethis-inline-share-buttons"></div>#}
+                        </div>
+                    </div>
+                </div>
+{#                <div class="col-12 col-md-6 col-lg-4">#}
+{#                    <div class="contact-realtor-wrapper">#}
+{#                        <div class="realtor-info">#}
+{#                            <img src="{% static 'img/bg-img/listing.jpg' %}" alt="">#}
+{#                            <div class="realtor---info">#}
+{#                                <h2>Jeremy Scott</h2>#}
+{#                                <p>Realtor</p>#}
+{#                                <h6><img src="{% static 'img/icons/phone-call.png' %}" alt=""> +45 677 8993000 223</h6>#}
+{#                                <h6><img src="{% static 'img/icons/envelope.png' %}" alt=""> office@template.com</h6>#}
+{#                            </div>#}
+{#                            <div class="realtor--contact-form">#}
+{#                                <form action="#" method="post">#}
+{#                                    <div class="form-group">#}
+{#                                        <input type="text" class="form-control" id="realtor-name" placeholder="Your Name">#}
+{#                                    </div>#}
+{#                                    <div class="form-group">#}
+{#                                        <input type="number" class="form-control" id="realtor-number" placeholder="Your Number">#}
+{#                                    </div>#}
+{#                                    <div class="form-group">#}
+{#                                        <input type="enumber" class="form-control" id="realtor-email" placeholder="Your Mail">#}
+{#                                    </div>#}
+{#                                    <div class="form-group">#}
+{#                                        <textarea name="messages" class="form-control" id="realtor-messages" cols="30" rows="10" placeholder="Your Message"></textarea>#}
+{#                                    </div>#}
+{#                                    <button type="submit" class="btn south-btn">Send Message</button>#}
+{#                                </form>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+            </div>
+            <!-- Listing Maps -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="listings-maps mt-100">
+                        <div id="googleMap"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Listings Content Area End ##### -->
+{% endblock body %}
+{% block footeraddress %}
+    <div class="address">
+    {% for company in company_details %}
+                                <h6><img src="{% static 'img/icons/phone-call.png' %}" alt="">{{ company.phoneno }}</h6>
+                                <h6><img src="{% static 'img/icons/envelope.png' %}" alt="">{{ company.email }}</h6>
+                                <h6><img src="{% static 'img/icons/location.png' %}" alt="">{{ company.address }} </h6>
+    {% endfor %}
+                            </div>
+{% endblock footeraddress %}

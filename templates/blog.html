@@ -1,0 +1,194 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %}Blog{% endblock title %}
+{% block topheader %}
+    {% for company in company_details %}
+    <div class="top-header-area">
+        <div class="h-100 d-md-flex justify-content-between align-items-center">
+            <div class="email-address">
+                <a href="mailto:{{ company.email }}">{{ company.email }}</a>
+            </div>
+            <div class="phone-number d-flex">
+                <div class="icon">
+                    <img src="{% static 'img/icons/phone-call.png' %}" alt="">
+                </div>
+                <div class="number">
+                    <a href="tel:{{ company.phoneno }}">{{ company.phoneno }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+{% endblock topheader %}
+{% load threadedcomments_tags %}
+{% block body %}
+    <!-- ##### Breadcumb Area Start ##### -->
+    <section class="breadcumb-area bg-img" style="background-image: url({% static 'img/bg-img/hero1.jpg' %});">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="breadcumb-content">
+                        <h3 class="breadcumb-title">Blog</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Breadcumb Area End ##### -->
+
+    <!-- ##### Blog Area Start ##### -->
+    <section class="south-blog-area section-padding-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-8">
+                    {% for post in posts %}
+                        <!-- Single Blog Area -->
+                        <div class="single-blog-area mb-50">
+                            <!-- Post Thumbnail -->
+                            {% if post.image %}
+                                <div class="blog-post-thumbnail">
+                                <img src="{{ post.image.url }}" alt="" style="width: 250px; height: auto;">
+                            </div>
+                            {% endif %}
+                            <!-- Post Content -->
+                            <div class="post-content">
+                                <!-- Headline -->
+                                <a href="#" class="headline">{{ post.title }}</a>
+                                <!-- Date -->
+                                <div class="post-date">
+                                    <a href="{% url 'home:post_detail' id=post.id %}"> Posted on {{ post.timestamp }}</a>
+                                </div>
+                                <!-- Post Meta -->
+                                <div class="post-meta">
+                                    {%  get_comment_count for post as count %}
+                                    <p>By <a href="#">{{ post.user_post.get_full_name }}</a> | {{ count }} {% if count is 1  %}Comment {% else %}Comments{% endif %}<a href="#"></a></p>
+                                </div>
+                                <p>{{ post.content }}</p>
+                                <!-- Read More btn -->
+                                <a href="{% url 'home:post_detail' id=post.id %}" class="btn south-btn">Read More</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                </div>
+                <div class="col-12 col-lg-4">
+                    <div class="blog-sidebar-area">
+
+                        <!-- Search Widget -->
+                        <div class="search-widget-area mb-70">
+                            <form action="#" method="get">
+                                <input type="search" name="search" id="search" placeholder="Search">
+                                <button type="submit"><i class="fa fa-search"></i></button>
+                            </form>
+                        </div>
+
+                        <!-- Catagories Widget -->
+{#                        <div class="south-catagories-card mb-70">#}
+{#                            <h5>Archive</h5>#}
+{#                            <ul class="catagories-menu">#}
+{#                                <li><a href="#">Radiology</a></li>#}
+{#                                <li><a href="#">Cardiology</a></li>#}
+{#                                <li><a href="#">Gastroenterology</a></li>#}
+{#                                <li><a href="#">Neurology</a></li>#}
+{#                                <li><a href="#">General surgery</a></li>#}
+{#                            </ul>#}
+{#                        </div>#}
+                        <!-- Catagories Widget -->
+{#                        <div class="south-catagories-card mb-70">#}
+{#                            <h5>Categories</h5>#}
+{#                            <ul class="catagories-menu">#}
+{#                                <li><a href="#">Radiology</a></li>#}
+{#                                <li><a href="#">Cardiology</a></li>#}
+{#                                <li><a href="#">Gastroenterology</a></li>#}
+{#                                <li><a href="#">Neurology</a></li>#}
+{#                                <li><a href="#">General surgery</a></li>#}
+{#                            </ul>#}
+{#                        </div>#}
+                <div class="featured-properties-slides owl-carousel">
+                            {% for property in properties %}
+                                {% if property.featured == "YES" %}
+                                    <a href="{% url 'home:property' id=property.id %}">
+                                        <div class="single-featured-property mb-50 wow fadeInUp" data-wow-delay="100ms">
+                                            <!-- Property Thumbnail -->
+                                            <div class="property-thumb">
+                                                <img src="{% static 'img/bg-img/feature1.jpg' %}" alt="">
+
+                                                <div class="tag">
+                                                    <span>FOR {{ property.type_of_property }}</span>
+                                                </div>
+                                                <div class="list-price">
+                                                    <p>${{ property.price |intcomma }}</p>
+                                                </div>
+                                            </div>
+                                            <!-- Property Content -->
+                                            <div class="property-content">
+                                                <h5>{{ property.title }}</h5>
+                                                <p class="location"><img src="{% static 'img/icons/location.png' %}" alt="">{{ property.location }}</p>
+                                                <p>{{ property.description | truncatewords:15 }}</p>
+                                                <div class="property-meta-data d-flex align-items-end justify-content-between">
+                                                    <div class="new-tag">
+                                                        <img src="{% static 'img/icons/new.png' %}" alt="">
+                                                    </div>
+                                                    <div class="bathroom">
+                                                        <img src="{% static 'img/icons/bathtub.png' %}" alt="">
+                                                        <span>{{ property.bathNo }}</span>
+                                                    </div>
+                                                    <div class="garage">
+                                                        <img src="{% static 'img/icons/garage.png' %}" alt="">
+                                                        <span>{{ property.bedNo }}</span>
+                                                    </div>
+                                                    <div class="space">
+                                                        <img src="{% static 'img/icons/space.png' %}" alt="">
+                                                        <span>{{ property.size | intcomma}} sq m</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+                <!-- Catagories Widget -->
+                <div class="featured-properties-slides owl-carousel">
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <!-- Pagination -->
+                        <div class="south-pagination mt-100 d-flex">
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination">
+                                    {% if posts.has_previous %}
+                                        <li class="page-item"><a class="page-link" href="?page={{ posts.previous_page_number }}">{{ posts.previous_page_number }}</a></li>
+                                    {% endif %}
+                                    <li class="page-item active"><a class="page-link" href="?page={{ posts.number }}">{{ posts.number }}</a></li>
+                                    {% if posts.has_next %}
+                                        <li class="page-item"><a class="page-link" href="?page={{ posts.next_page_number }}">{{ posts.next_page_number }}</a></li>
+                                    {% endif %}
+
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Blog Area End ##### -->
+{% endblock body %}
+{% block footeraddress %}
+    <div class="address">
+    {% for company in company_details %}
+                                <h6><img src="{% static 'img/icons/phone-call.png' %}" alt="">{{ company.phoneno }}</h6>
+                                <h6><img src="{% static 'img/icons/envelope.png' %}" alt="">{{ company.email }}</h6>
+                                <h6><img src="{% static 'img/icons/location.png' %}" alt="">{{ company.address }} </h6>
+    {% endfor %}
+                            </div>
+{% endblock footeraddress %}

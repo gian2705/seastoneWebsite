@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load widget_tweaks %}
+{% load static %}
+{% block title %}Career Search{% endblock title %}
+{% block topheader %}
+    {% for company in company_details %}
+        <div class="top-header-area">
+            <div class="h-100 d-md-flex justify-content-between align-items-center">
+                <div class="email-address">
+                    <a href="mailto:{{ company.email }}">{{ company.email }}</a>
+                </div>
+                <div class="phone-number d-flex">
+                    <div class="icon">
+                        <img src="{% static 'img/icons/phone-call.png' %}" alt="">
+                    </div>
+                    <div class="number">
+                        <a href="tel:{{ company.phoneno }}">{{ company.phoneno }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock topheader %}
+{% block body %}
+    <!-- ##### Breadcumb Area Start ##### -->
+    <section class="breadcumb-area bg-img" style="background-image: url({% static 'img/bg-img/hero1.jpg' %});">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="breadcumb-content">
+                        <h3 class="breadcumb-title">Careers</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Breadcumb Area End ##### -->
+
+    <section class="south-contact-area section-padding-100">
+        <div class="container">
+
+            <div class="row">
+
+                <!-- Contact Form Area -->
+                <div class="col-12 col-lg-8">
+                    {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                                <li{% if message.tags %} class="{{ message.tags }} alert alert-success alert-dismissible fade show"{% endif %}>
+                                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                                    {{ message }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    <div class="contact-form">
+                        <h2> INTERNSHIP  - JOB - FIELD </h2>
+                        <h6><i>Get to work with seastone company limited as an intern</i></h6>
+                        <br>
+                        <div class="card align-content-center">
+                            <div class="card-body align-content-center">
+                                <form method="post">{% csrf_token %}
+                                    <div class="form-group">
+{#                                        <h6> Full name: </h6><input type="text" class="form-control" name="text" id="contact-name" placeholder="Full name" required>#}
+                                        <h6> Full name: </h6>{% render_field internship_form.full_name class='form-control' placeholder='Full name' %}
+                                    </div>
+                                    <br>
+                                    <div class="form-group">
+                                        <h6> E-mail: </h6>{% render_field internship_form.email class='form-control' placeholder='Enter your email address' %}
+                                    </div>
+                                    <br>
+                                    <div class="form-group">
+                                        <h6> Social Media Usernames</h6>
+                                        <ul>
+                                            <li><h6>Facebook: </h6>{% render_field internship_form.facebook class='form-control' placeholder='Facebook' %}</li>
+                                            <li><h6>Twitter: </h6>{% render_field internship_form.twitter class='form-control' placeholder='Twitter' %}</li>
+                                            <li><h6>Instagram: </h6>{% render_field internship_form.instagram class='form-control' placeholder='Instagram' %}</li>
+                                            <li><h6>LinkedIn: </h6>{% render_field internship_form.linkedin class='form-control' placeholder='LinkedIn profile url' %}</li>
+                                        </ul>
+                                        at least two of these
+                                    </div>
+                                    <br>
+                                    <div class="form-group">
+                                        <h6>Interests:</h6> {% render_field internship_form.interests class='form-control' placeholder='What are you most interested in' %}
+                                    </div>
+                                    <br>
+                                    <div class="form-group ">
+                                        <h6> Extra Curricular Activities: </h6>{% render_field internship_form.extracurriculars class='form-control' placeholder='What are you hobbies' %}
+                                    </div>
+                                    <br>
+                                    <div class="form-group">
+                                        <h6>Department:</h6>
+                                        <div class="col-lg-6 col-sm-12">
+                                            {% render_field internship_form.department class='form-control dropdown' %}
+                                        </div>
+                                        <span> <br/></span>
+                                    </div>
+                                    <div class="row align-content-center col-12 col-lg-8">
+                                        <button type="submit" class="btn south-btn align-self-center">Submit Application</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Google Maps -->
+    <div class="map-area mb-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div id="googleMap" class="googleMap"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}
+{% block footeraddress %}
+    <div class="address">
+        {% for company in company_details %}
+            <h6><img src="{% static 'img/icons/phone-call.png' %}" alt="">{{ company.phoneno }}</h6>
+            <h6><img src="{% static 'img/icons/envelope.png' %}" alt="">{{ company.email }}</h6>
+            <h6><img src="{% static 'img/icons/location.png' %}" alt="">{{ company.address }} </h6>
+        {% endfor %}
+    </div>
+{% endblock footeraddress %}

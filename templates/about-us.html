@@ -1,0 +1,189 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %}About Us{% endblock title %}
+{% block topheader %}
+    {% for company in company_details %}
+    <div class="top-header-area">
+        <div class="h-100 d-md-flex justify-content-between align-items-center">
+            <div class="email-address">
+                <a href="mailto:{{ company.email }}">{{ company.email }}</a>
+            </div>
+            <div class="phone-number d-flex">
+                <div class="icon">
+                    <img src="{% static 'img/icons/phone-call.png' %}" alt="">
+                </div>
+                <div class="number">
+                    <a href="tel:{{ company.phoneno }}">{{ company.phoneno }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+{% endblock topheader %}
+{% block body %}
+{% for company in company_details %}
+    <!-- ##### Breadcumb Area Start ##### -->
+    <section class="breadcumb-area bg-img" style="background-image: url({% static 'img/bg-img/about.jpg' %});">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="breadcumb-content">
+                        <h3 class="breadcumb-title">About us</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Breadcumb Area End ##### -->
+
+
+    <!-- ##### About Content Wrapper Start ##### -->
+    <section class="about-content-wrapper section-padding-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-8">
+                    <div class="section-heading text-centers wow fadeInUp" data-wow-delay="250ms">
+                        <h2>We search for the perfect home</h2>
+                        <p><i>{{ company.motto | linebreaks }}</i></p>
+                    </div>
+                    <div class="about-content">
+
+                        <img class="wow fadeInUp" data-wow-delay="350ms" src="{% static 'img/bg-img/about.jpg' %}" alt="">
+                        <p class="wow fadeInUp" data-wow-delay="450ms">{{ company.description | linebreaks }}</p>
+                        <h5 class="wow fadeInUp">Our Vision</h5>
+                        <p class="wow fadeInUp" data-wow-delay="450ms">{{ company.vision | linebreaks}}</p>
+                        <h5 class="wow fadeInUp">Our Mission</h5>
+                        <p class="wow fadeInUp" data-wow-delay="450ms">{{ company.mission | linebreaks}}</p>
+                        <h5 class="wow fadeInUp">Our Objective</h5>
+                        <p class="wow fadeInUp" data-wow-delay="450ms">{{ company.objective | linebreaks}}</p>
+                        <h5 class="wow fadeInUp">Our Values</h5>
+                        <p class="wow fadeInUp" data-wow-delay="450ms">{{ company.values | linebreaks}}</p>{% endfor %}
+
+
+
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4">
+                    <div class="section-heading text-left wow fadeInUp" data-wow-delay="250ms">
+                        <h2>Featured Properties</h2>
+                        <p></p>
+                    </div>
+
+                    <div class="featured-properties-slides owl-carousel wow fadeInUp" data-wow-delay="350ms">
+                        {% for property in properties %}
+                            {% if property.featured == "YES" %}
+                    <a href="{% url 'home:property' id=property.id %}">
+                    <div class="single-featured-property mb-50 wow fadeInUp" data-wow-delay="100ms">
+                        <!-- Property Thumbnail -->
+                        <div class="property-thumb">
+                            <img src="{% static 'img/bg-img/feature1.jpg' %}" alt="">
+
+                            <div class="tag">
+                                <span>FOR {{ property.type_of_property }}</span>
+                            </div>
+                            <div class="list-price">
+                                <p>${{ property.price |intcomma }}</p>
+                            </div>
+                        </div>
+                        <!-- Property Content -->
+                        <div class="property-content">
+                            <h5>{{ property.title }}</h5>
+                            <p class="location"><img src="{% static 'img/icons/location.png' %}" alt="">{{ property.location }}</p>
+                            <p>{{ property.description | truncatechars:120 }}</p>
+                            <div class="property-meta-data d-flex align-items-end justify-content-between">
+                                <div class="new-tag">
+                                    <img src="{% static 'img/icons/new.png' %}" alt="">
+                                </div>
+                                <div class="bathroom">
+                                    <img src="{% static 'img/icons/bathtub.png' %}" alt="">
+                                    <span>{{ property.bathNo }}</span>
+                                </div>
+                                <div class="garage">
+                                    <img src="{% static 'img/icons/garage.png' %}" alt="">
+                                    <span>{{ property.bedNo }}</span>
+                                </div>
+                                <div class="space">
+                                    <img src="{% static 'img/icons/space.png' %}" alt="">
+                                    <span>{{ property.size | intcomma}} sq m</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
+                            {% endif %}
+                    {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### About Content Wrapper End ##### -->
+
+    <!-- ##### Call To Action Area Start ##### -->
+    <section class="call-to-action-area bg-fixed bg-overlay-black" style="background-image: url({% static 'img/bg-img/cta.jpg' %})">
+        <div class="container h-100">
+            <div class="row align-items-center h-100">
+                <div class="col-12">
+                    <div class="cta-content text-center">
+                        <h2 class="wow fadeInUp" data-wow-delay="300ms">Are you looking for a place to rent?</h2>
+                        
+                        <a href="{% url 'home:listing' %}" class="btn south-btn mt-50 wow fadeInUp" data-wow-delay="500ms">Search</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Call To Action Area End ##### -->
+
+    <!-- ##### Meet The Team Area Start ##### -->
+    <section class="meet-the-team-area section-padding-100-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading">
+                        <h2>Meet The Team</h2>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                {% for member in team %}
+                <!-- Single Team Member -->
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <div class="single-team-member mb-100 wow fadeInUp" data-wow-delay="250ms">
+                        <!-- Team Member Thumb -->
+                        <div class="team-member-thumb">
+                            <img src="{{ member.picture.url }}" alt="">
+                        </div>
+                        <!-- Team Member Info -->
+                        <div class="team-member-info">
+                            <div class="section-heading">
+                                <img src="{% static 'img/icons/prize.png' %}" alt="">
+                                <h2>{{ member.name }}</h2>
+                                <p>{{ member.title }}</p>
+                            </div>
+                            <div class="address">
+                                <h6><img src="{% static 'img/icons/phone-call.png' %}" alt="">{{ member.phoneNo }}</h6>
+                                <h6><img src="{% static 'img/icons/envelope.png' %}" alt="">{{ member.email }}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- ##### Meet The Team Area End ##### -->
+{% endblock body %}
+{% block footeraddress %}
+    <div class="address">
+    {% for company in company_details %}
+                                <h6><img src="{% static 'img/icons/phone-call.png' %}" alt="">{{ company.phoneno }}</h6>
+                                <h6><img src="{% static 'img/icons/envelope.png' %}" alt="">{{ company.email }}</h6>
+                                <h6><img src="{% static 'img/icons/location.png' %}" alt="">{{ company.address }} </h6>
+    {% endfor %}
+                            </div>
+{% endblock footeraddress %}
