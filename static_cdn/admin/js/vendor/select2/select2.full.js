@@ -824,7 +824,7 @@ S2.define('select2/results',[
 
     if (data.results == null || data.results.length === 0) {
       if (this.$results.children().length === 0) {
-        this.trigger('results:messages', {
+        this.trigger('results:message', {
           message: 'noResults'
         });
       }
@@ -1159,7 +1159,7 @@ S2.define('select2/results',[
       params.element.addClass('select2-results__option--highlighted');
     });
 
-    container.on('results:messages', function (params) {
+    container.on('results:message', function (params) {
       self.displayMessage(params);
     });
 
@@ -3473,7 +3473,7 @@ S2.define('select2/data/ajax',[
           return;
         }
 
-        self.trigger('results:messages', {
+        self.trigger('results:message', {
           message: 'errorLoading'
         });
       });
@@ -3751,7 +3751,7 @@ S2.define('select2/data/minimumInputLength',[
     params.term = params.term || '';
 
     if (params.term.length < this.minimumInputLength) {
-      this.trigger('results:messages', {
+      this.trigger('results:message', {
         message: 'inputTooShort',
         args: {
           minimum: this.minimumInputLength,
@@ -3783,7 +3783,7 @@ S2.define('select2/data/maximumInputLength',[
 
     if (this.maximumInputLength > 0 &&
         params.term.length > this.maximumInputLength) {
-      this.trigger('results:messages', {
+      this.trigger('results:message', {
         message: 'inputTooLong',
         args: {
           maximum: this.maximumInputLength,
@@ -3818,7 +3818,7 @@ S2.define('select2/data/maximumSelectionLength',[
         var count = currentData != null ? currentData.length : 0;
         if (self.maximumSelectionLength > 0 &&
           count >= self.maximumSelectionLength) {
-          self.trigger('results:messages', {
+          self.trigger('results:message', {
             message: 'maximumSelected',
             args: {
               maximum: self.maximumSelectionLength
